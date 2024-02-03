@@ -1,0 +1,401 @@
+{
+    // Waybar position //
+
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    // "height": 30,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+
+
+    // Positions of modules //
+
+	"modules-left": [
+        "custom/padd",
+        "custom/rl_end","hyprland/workspaces","custom/rr_end",
+        "custom/rl_end","mpris","custom/rr_end",
+        "custom/padd"
+    ],
+	"modules-center": [
+        "custom/padd",
+        "custom/rl_end","clock","custom/rr_end",
+        "custom/padd"
+    ],
+	"modules-right": [
+        "custom/padd",
+        "custom/rl_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","custom/updates","custom/rr_end",
+        "custom/rl_end","tray","custom/rr_end",
+        "custom/rl_end","temperature","custom/rr_end",
+        "custom/rl_end","group/hardware","custom/rr_end",
+        "custom/rl_end","group/group-power","custom/rr_end",
+        "custom/padd"
+    ],
+
+
+    // Modules //
+
+    "custom/icon": {
+        "format": "  ",
+        "tooltip": false
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}  {name}",
+        "format-icons": {
+            "1": "",
+            "music": "",
+            "default": ""
+        },
+        // "format-icons": {
+        //     "1": "",
+        //     "2": "",
+        //     "3": "",
+        //     "4": "",
+        //     "5": "",
+        //     // "active": "",
+        //     "default": ""
+        // },
+        "active-only": true
+    },
+
+	"wlr/taskbar": {
+		"format": "{icon}",
+		"icon-size": 18,
+		// "icon-theme": "Tela-circle-purple",
+        "spacing": 0,
+		"tooltip-format": "{title}",
+		"on-click": "activate",
+		"on-click-middle": "close",
+		"ignore-list": [
+			"Alacritty"
+		],
+		"app_ids-mapping": {
+			"firefoxdeveloperedition": "firefox-developer-edition"
+		}
+	},
+
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "player-icons": { 
+            "default": "▶",
+            "mpv": "🎵"
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+        // "ignored-players": ["firefox"]
+        "max-length": 50,
+        "interval": 1
+    },
+
+    // "cava": {
+    //     //"cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+    //     "framerate": 30,
+    //     "autosens": 1,
+    //     "sensitivity": 100,
+    //     "bars": 8,
+    //     "lower_cutoff_freq": 50,
+    //     "higher_cutoff_freq": 10000,
+    //     "method": "pulse",
+    //     "source": "auto",
+    //     "stereo": true,
+    //     "reverse": false,
+    //     "bar_delimiter": 0,
+    //     "monstercat": false,
+    //     "waves": false,
+    //     "noise_reduction": 0.77,
+    //     "input_delay": 2,
+    //     "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+    //     "actions": {
+    //         "on-click-right": "mode"
+    //     }
+    // },
+
+    // "idle_inhibitor": {
+    //     "format": "{icon}",
+    //     "format-icons": {
+    //         "activated": "󰥔",
+    //         "deactivated": ""
+    //     }
+    // },
+
+    "clock": {
+        "format": "{:%R · %A, %d/%m}",
+        "format-alt": "{:%R}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#cfc9c2'><b>{}</b></span>",
+                "weekdays": "<span color='#bb9af7'><b>{}</b></span>",
+                "days": "<span color='#565f89'><b>{}</b></span>",
+                "today": "<span color='#7aa2f7'><b>{}</b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-",
+        "min-length": 6
+    },
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": " {signalStrength}%",
+        "format-ethernet": "󱘖 Wired",
+        "tooltip-format": "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
+        "format-linked": "󱘖 {ifname} (No IP)",
+        "format-disconnected": " Disconnected",
+        "format-alt": "󰤨 {essid}",
+        "max-length": 25,
+        "interval": 5
+    },
+
+    "bluetooth": {
+        "format": "",
+        "format-disabled": "", // an empty format will hide the module
+        "format-connected": " {num_connections}",
+        "tooltip-format": " {device_alias}",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": " {device_alias}"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}",
+        "format-muted": "婢",
+        "on-click": "pavucontrol -t 3",
+        "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -o m",
+        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -o d",
+        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -o i",
+        "tooltip-format": "{icon} {desc} // {volume}%",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "on-click": "pavucontrol -t 4",
+        "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -i m",
+        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -i i",
+        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -i d",
+        "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
+        "scroll-step": 5
+    },
+
+    "custom/updates": {
+        "exec": "~/.config/hypr/scripts/systemupdate.sh",
+        "return-type": "json",
+        "format": "󰮯 {}",
+        "on-click": "~/.config/hypr/scripts/systemupdate.sh up",
+        "interval": 86400, // once every day
+        "tooltip": true
+    },
+
+    "tray": {
+        "icon-size": 17,
+        "spacing": 5
+    },
+
+    "sway/language": {
+        "format": " {short} {variant}"
+    },
+
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
+    },
+
+    "group/hardware": {
+		"orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "sub-hardware",
+            "transition-left-to-right": false
+        },
+		"modules": [
+			"battery",
+			"cpu",
+			"memory"
+		]
+	},
+
+    "battery": {
+        "states": {
+            "good": 90,
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰂄 {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": "{icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} {icon7} {usage}% |",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": "{used:0.1f}G/{total:0.1f}G - {percentage}% |",
+        "tooltip-format": "Memory usage: {used:0.1f}G/{total:0.1f}G - {percentage}%\nMemory available: {avail:0.1f}G\n\nSwap usage: {swapUsed:0.1f}G/{swapTotal:0.1f}G - {swapPercentage}%\nSwap available: {swapAvail:0.1f}G"
+    },
+
+    // "custom/wallchange": {
+    //     "format": "{}",
+    //     "exec": "echo ; echo 󰆊 switch wallpaper",
+    //     "on-click": "~/.config/hypr/scripts/swwwallpaper.sh -n",
+    //     "on-click-right": "~/.config/hypr/scripts/swwwallpaper.sh -p",
+    //     "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/swwwallselect.sh",
+    //     "interval" : 86400, // once every day
+    //     "tooltip": true
+    // },
+
+    // "custom/mode": {
+    //     "format": "{}",
+    //     "exec": "echo ; echo 󰟡 switch mode",
+    //     "on-click": "~/.config/hypr/scripts/themeswitch.sh -n",
+    //     "on-click-right": "~/.config/hypr/scripts/themeswitch.sh -p",
+    //     "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/themeselect.sh",
+    //     "interval" : 86400, // once every day
+    //     "tooltip": true
+    // },
+
+    // "custom/wbar": {
+    //     "format": "{}", //    //
+    //     "exec": "echo ; echo  switch menubar //  dock",
+    //     "on-click": "~/.config/hypr/scripts/wbarconfgen.sh n",
+    //     "on-click-right": "~/.config/hypr/scripts/wbarconfgen.sh p",
+    //     "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/quickapps.sh kitty firefox spotify code dolphin",
+    //     "interval" : 86400,
+    //     "tooltip": true
+    // },
+
+    // "custom/cliphist": {
+    //     "format": "{}",
+    //     "exec": "echo ; echo 󰅇 clipboard history",
+    //     "on-click": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh c",
+    //     "on-click-right": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh d",
+    //     "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh w",
+    //     "interval" : 86400, // once every day
+    //     "tooltip": true
+    // },
+
+    "group/group-power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/power", // First element is the "group leader" and won't ever be hidden
+            "custom/quit",
+            "custom/lock",
+            "custom/reboot"
+        ]
+    },
+
+    "custom/power": {
+        "format": "",
+        "exec": "echo ; echo  logout",
+        "on-click": "~/.config/hypr/scripts/logoutlaunch.sh 2",
+        "interval" : 86400, // once every day
+        "tooltip": true
+    },
+    "custom/quit": {
+        "format": "󰗼 ",
+        "tooltip": false,
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/lock": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "swaylock"
+    },
+    "custom/reboot": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "reboot"
+    },
+
+
+    // modules for padding //
+
+    "custom/l_end": {
+        "format": " ",
+        "interval" : "once",
+        "tooltip": false
+    },
+
+    "custom/r_end": {
+        "format": " ",
+        "interval" : "once",
+        "tooltip": false
+    },
+
+    "custom/sl_end": {
+        "format": " ",
+        "interval" : "once",
+        "tooltip": false
+    },
+
+    "custom/sr_end": {
+        "format": " ",
+        "interval" : "once",
+        "tooltip": false
+    },
+
+    "custom/rl_end": {
+        "format": " ",
+        "interval" : "once",
+        "tooltip": false
+    },
+
+    "custom/rr_end": {
+        "format": " ",
+        "interval" : "once",
+        "tooltip": false
+    },
+
+    "custom/padd": {
+        "format": "",
+        "interval" : "once",
+        "tooltip": false
+    }
+
+}
+
