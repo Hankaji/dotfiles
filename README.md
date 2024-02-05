@@ -35,7 +35,7 @@ Check out the dotfiles in your $HOME directory
 
 ```
 $ git clone https://github.com/Hankaji/dotfiles.git ~/.dotfiles
-$ cd ~/dotfiles
+$ cd ~/.dotfiles
 ```
 
 Then, use stow to start creating symlinks for dotfiles
