@@ -9,24 +9,34 @@ This is the dotfiles for my configuration i used on Linux
 - Shell: Zsh
 - Terminal: Kitty
 - DE : Hyprland
-    - Status bar: -to be added-
-    - Notification: Dunst
+    - Status bar and widgets: [ags](https://github.com/Aylur/ags)
     - File explorer: Dolphin
     - Musicplayer: mpd, ncmpcpp
     - Audio visualizer: cava
 
 ## Requirement
 
-### Git
+- Git
+- stow
+- Zsh
+- Oh-my-zsh
+- Hyprland-git
+    - Hyprlock-git
+    - Hypridle-git
+    - Hyprpicker-git
+    - Hyprlang-git
+- Kitty
+- Neofetch
+- 
 
-```
-$ sudo pacman -S git
-```
+### Arch Linux
 
-### stow
+```bash
+$ pacman -S git stow zsh neofetch kitty
 
-```
-$ sudo pacman -S stow
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+$ yay -S hyprlang-git hyprland-git hypridle-git hyprlock-git hyprpicker-git cava
 ```
 
 ## Installation
@@ -34,12 +44,10 @@ $ sudo pacman -S stow
 Check out the dotfiles in your $HOME directory
 
 ```
-$ git clone https://github.com/Hankaji/dotfiles.git ~/.dotfiles
-$ cd ~/.dotfiles
+$ git clone https://github.com/Hankaji/dotfiles.git ~/dotfiles
+$ cd ~/dotfiles
 ```
 
 Then, use stow to start creating symlinks for dotfiles
 
-```
-$ stow .
-```
+Use `$ stow .` or `$ stow --adopt .` to stow all the config files
