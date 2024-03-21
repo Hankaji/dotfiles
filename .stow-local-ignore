@@ -19,6 +19,10 @@ _darcs
 
 backups
 
+# Install scripts
+install.sh
+scripts
+
 ^/README.*
 ^/LICENSE.*
 ^/COPYING

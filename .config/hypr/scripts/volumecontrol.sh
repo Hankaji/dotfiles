@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
-ScrDir=`dirname "$(realpath "$0")"`
+# ScrDir=`dirname "$(realpath "$0")"`
 # source $ScrDir/globalcontrol.sh
 
 
 # define functions
 
-function print_error
+print_error()
 {
 cat << "EOF"
     ./volumecontrol.sh -[device] <action>
@@ -51,6 +51,7 @@ do
     o) nsink=$(pamixer --get-default-sink | grep "_output." | awk -F '" "' '{print $NF}' | sed 's/"//')
         srce=""
         dvce="speaker" ;;
+    *) print_error ;;
     esac
 done
 
@@ -63,14 +64,16 @@ fi
 
 shift $((OPTIND -1))
 step="${2:-5}"
-icodir="~/.config/dunst/icons/vol"
+# icodir="~/.config/dunst/icons/vol"
 
 case $1 in
-    i) pamixer $srce -i ${step}
+    i) pamixer "$srce" -i "${step}"
         notify_vol ;;
-    d) pamixer $srce -d ${step}
+    d) pamixer "$srce" -d "${step}"
         notify_vol ;;
-    m) pamixer $srce -t
+    m) pamixer "$srce" -t
         notify_mute ;;
     *) print_error ;;
 esac
+
+ags -r "volumeRevealer.show()"

@@ -27,13 +27,13 @@ ZSH_THEME=""
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -61,7 +61,7 @@ ZSH_THEME=""
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="dd-mm-yyyy"
+HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -84,6 +84,37 @@ prompt pure
 
 source $HOME/.oh-my-zsh/custom/themes/tokyo-pure-color
 
+# In case a command is not found, try to find the package that has it
+#function command_not_found_handler {
+#    local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
+#    printf 'zsh: command not found: %s\n' "$1"
+#    local entries=( ${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"} )
+#    if (( ${#entries[@]} )) ; then
+#        printf "${bright}$1${reset} may be found in the following packages:\n"
+#        local pkg
+#        for entry in "${entries[@]}" ; do
+#            local fields=( ${(0)entry} )
+#            if [[ "$pkg" != "${fields[2]}" ]] ; then
+#                printf "${purple}%s/${bright}%s ${green}%s${reset}\n" "${fields[1]}" "${fields[2]}" "${fields[3]}"
+#            fi
+#            printf '    /%s\n' "${fields[4]}"
+#            pkg="${fields[2]}"
+#        done
+#    fi
+#    return 127
+#}
+
+aurhelper="yay"
+
+function in {
+    local pkg="$1"
+    if pacman -Si "$pkg" &>/dev/null ; then
+        sudo pacman -S "$pkg"
+    else 
+        $aurhelper -S "$pkg"
+    fi
+}
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -97,7 +128,7 @@ source $HOME/.oh-my-zsh/custom/themes/tokyo-pure-color
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -105,12 +136,42 @@ source $HOME/.oh-my-zsh/custom/themes/tokyo-pure-color
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-eval $(thefuck --alias)
-eval "$(zoxide init zsh)"
 alias zshconfig="code ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshrc="nvim ~/.zshrc"
 alias neo="neo-matrix"
-alias pn="pnpm"
+alias vc="code --disable-gpu"
+alias cd="z"
+alias icat="kitty icat"
+alias mvn="mvn39"
+alias cw="~/.config/hypr/scripts/swww_change_wpaper.sh"
+# alias vc="code --ozone-platform-hint=wayland --disable-gpu"
+
+alias un='$aurhelper -Rns' # uninstall package
+alias up='$aurhelper -Syu' # update system/package/aur
+alias pl='$aurhelper -Qs' # list installed package
+alias ps='$aurhelper -Ss' # search for availabe package
+alias pc='$aurhelper -Sc' # remove unused cache
+alias po='$aurhelper -Qtdq | $aurhelper -Rns -' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
+
+# Handy change dir shortcuts
+alias ..='z ..'
+alias ...='z ../..'
+alias .3='z ../../..'
+alias .4='z ../../../..'
+alias .5='z ../../../../..'
+
+# Local binaries
+export PATH="$HOME/.local/bin/:$PATH"
+
+# Display pokemon
+pokemon-colorscripts --no-title -r 1,3,6
+
+# The fuck
+eval "$(thefuck --alias)"
+
+# Zoxide
+eval "$(zoxide init zsh)"
 
 # bun completions
 [ -s "/home/hankaji/.bun/_bun" ] && source "/home/hankaji/.bun/_bun"
@@ -118,14 +179,6 @@ alias pn="pnpm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="/home/hankaji/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -154,3 +207,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Jenv (Java environment manager)
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+export PATH=$PATH:/home/hankaji/.spicetify
