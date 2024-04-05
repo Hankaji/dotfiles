@@ -109,9 +109,9 @@ aurhelper="yay"
 function in {
     local pkg="$1"
     if pacman -Si "$pkg" &>/dev/null ; then
-        sudo pacman -S "$pkg"
+        catch-pass-prompt sudo pacman -S "$pkg"
     else 
-        $aurhelper -S "$pkg"
+        catch-pass-prompt $aurhelper -S "$pkg"
     fi
 }
 
@@ -145,10 +145,11 @@ alias cd="z"
 alias icat="kitty icat"
 alias mvn="mvn39"
 alias cw="~/.config/hypr/scripts/swww_change_wpaper.sh"
+alias lg="lazygit"
 # alias vc="code --ozone-platform-hint=wayland --disable-gpu"
 
 alias un='$aurhelper -Rns' # uninstall package
-alias up='$aurhelper -Syu' # update system/package/aur
+alias up='catch-pass-prompt $aurhelper -Syu' # update system/package/aur
 alias pl='$aurhelper -Qs' # list installed package
 alias ps='$aurhelper -Ss' # search for availabe package
 alias pc='$aurhelper -Sc' # remove unused cache
@@ -212,3 +213,8 @@ export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
 export PATH=$PATH:/home/hankaji/.spicetify
+
+# Add .NET Core SDK tools
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+

@@ -1,0 +1,105 @@
+@mixin notification() {
+    @include floating-widget($use-shadow: false);
+        padding: $padding;
+
+        &.critical {
+            box-shadow: inset 0 0 .5em 0 $error-bg;
+        }
+
+        .content {
+
+            .title {
+                color: $primary-fg;
+                font-size: 1.1em;
+            }
+    
+            .time {
+                color: transparentize($primary-fg, .2);
+            }
+
+            button.close-button {
+                // margin: 0 $padding;
+                @include button($flat: true);
+                margin-left: $spacing / 2;
+                border-radius: $radius*0.8;
+                min-width: 1.2em;
+                min-height: 1.2em;
+
+                &:hover {
+                    @include button-hover;
+                    background-color: transparentize($error-bg, .5);
+                }
+
+                &:active {
+                    background-image: none;
+                    background-color: $error-bg;
+                }
+            }
+
+            .description {
+                font-size: .9em;
+                color: transparentize($primary-fg, .2);
+            }
+
+            .icon {
+                border-radius: $radius;
+                margin-right: $padding;
+    
+                // &.img {
+                //     border: $border;
+                // }
+            }
+        }
+
+        // .description {
+        //     min-width: 350px;
+        // }
+
+        box.actions {
+            // @include spacing(0.5);
+            margin-top: $spacing;
+
+            button {
+                @include button($flat: true);
+                background-color: $overlay-bg;
+                border-radius: $radius;
+                font-size: 1rem;
+                padding: $padding * 0.5;
+            }
+        }
+}
+
+window.notifications {
+
+    .notification {
+        @include notification;
+    }
+}
+
+window.status-notification {
+
+    .popup-holder {
+
+        .status-wrapper {
+            $size: 2.8rem;
+
+            @include floating-widget;
+            // background-color: $primary-bg;
+            margin: $padding * 1.5;
+            padding: $padding * 1.5;
+            // border-radius: $radius;
+
+            .icon {
+                color: $primary-bg;
+                min-width: $size * .96;
+                // font-size: 12px;
+                // margin-right: -20px;
+            }
+    
+            .slider-status {
+                @include slider($slider-visible: false, $size: $size);
+            }
+        }
+    }
+
+}

@@ -1,0 +1,147 @@
+window.notification-center {
+    .notification-center-wrapper {
+        @include floating-widget;
+
+        .notifications {
+            @include inline-widget;
+
+            .header {
+                margin-bottom: $spacing;
+                // margin-right: $spacing;
+    
+                >label {
+                    margin-left: $radius * .5;
+                }
+    
+                button {
+                    @include button($flat: true);
+                    border-radius: $radius*.8;
+                    padding: $padding*.6;
+                }
+            }
+    
+            .notification-scrollable {
+                @include scrollable;
+            }
+    
+            .notification-list {
+                margin-right: $spacing;
+            }
+    
+            .notification {
+                @include notification;
+                // @include inline-widget;
+                border: none;
+                margin: 0 0 $spacing 0;
+            }
+    
+            .placeholder {
+                image {
+                    font-size: 7em;
+                }
+    
+                label {
+                    font-size: 1.2em;
+                }
+            }
+        }
+
+        .date-column {
+            min-width: 150px;
+
+            .calendar {
+                @include inline-widget;
+                padding: $padding*2 $padding*2 0;
+
+                calendar {
+
+                    &.button {
+                        @include button($flat: true);
+                    }
+
+                    &:selected {
+                        // box-shadow: inset 0 -8px 0 0 transparentize($primary-bg, 0.5),
+                        //     inset 0 0 0 1px $primary-bg;
+                        background-color: $hover-bg;
+                        border-radius: $radius*0.6;
+                        color: $hover-fg;
+                        padding: 10em;
+                    }
+
+                    &.header {
+                        background-color: transparent;
+                        border: none;
+                        color: transparentize($fg, 0.5);
+                    }
+
+                    &.highlight {
+                        background-color: transparent;
+                        color: $active-bg;
+                    }
+
+                    &:indeterminate {
+                        color: transparentize($fg, 0.75);
+                    }
+
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    padding: .2em;
+                    // border: 1px solid red;
+                    // margin: 50px;
+                }
+            }
+
+            .clock-box {
+                $size: 40px;
+                min-width: $size;
+                // @include inline-widget;
+
+                .time-n-date {
+                    @include inline-widget;
+
+                    .clock {
+                        min-width: $size * 1.1;
+                        min-height: $size * 1.2;
+    
+                        & label {
+                            // font-size: 1.9rem;
+                            font-size: $size * 0.63;
+    
+                            &.hour {
+                                color: $active-bg;
+                            }
+    
+                            &.minute {
+                                color: transparentize($fg, $amount: 0.5);
+                            }
+                        }
+                    }
+    
+                    .weekday {
+                        font-size: 1.1rem;
+                        // font-weight: bold;
+                        font-weight: 500;
+                        color: transparentize($fg, $amount: 0.5);
+                    }
+    
+                    .year-month {
+                        .year {
+                            font-size: 1.3rem;
+                            font-weight: 600;
+                        }
+    
+                        .month {
+                            font-size: 1.1rem;
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .uptime {
+                    @include inline-widget;
+                    padding: $padding*.2;
+                }
+            }
+        }
+    }
+}

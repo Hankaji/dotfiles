@@ -1,0 +1,125 @@
+@import './mixins/inherit.scss';
+@import './mixins/button.scss';
+@import './mixins/slider.scss';
+@import './mixins/floating-widget.scss';
+@import './mixins/unset.scss';
+@import './mixins/scrollable.scss';
+@import './mixins/spacing.scss';
+
+// --------------------------------------------------
+// Reset
+// --------------------------------------------------
+* {
+    all: unset;
+    font-size: 14px;
+    color: $primary-fg;
+    padding: 0;
+    margin: 0;
+    @include inherit-child($color: true);
+}
+
+// --------------------------------------------------
+// Global
+// --------------------------------------------------
+window {
+    // all: unset;
+    background-color: transparent;
+}
+
+label {
+    font-weight: bold;
+}
+
+// button, button:active, button:focus, button:hover {
+//     // all: unset;
+//     // @include inherit-child($color: true);
+//     // background: none;
+//     // border: none;
+// }
+
+tooltip {
+    background-color: $primary-bg;
+    color: $primary-fg;
+    border: 1px solid $primary-fg;
+    border-radius: 5px;
+}
+
+window.popup {
+    >* {
+        border: none;
+        box-shadow: none;
+    }
+
+    menu {
+        border-radius: $radius;
+        background-color: $primary-bg;
+        padding: $padding*.8;
+        border: $border;
+
+        separator {
+            background-color: $border-color;
+        }
+
+        menuitem {
+            @include button($flat: true);
+            border-radius: $radius*.6;
+            padding: $padding * .2 $padding * .6;
+            margin: ($spacing * .4) 0;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &.no-hover {
+                &:hover {
+                    background-color: inherit;
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
+
+switch {
+    $size: 1.2rem;
+    background-color: $overlay-bg;
+    border-radius: $radius;
+    transition: $transition;
+
+    slider {
+        background-color: $fg;
+        border-radius: 100%;
+        min-width: $size;
+        min-height: $size;
+        margin: $padding * .3;
+    }
+    
+    &.checked {
+        background-color: $bg;
+    }
+
+    image {
+        color: $fg;
+    }
+}
+
+// --------------------------------------------------
+// Widgets imports
+// --------------------------------------------------
+@import '../ts/widgets/notification/notification.scss';
+@import '../ts/widgets/applauncher/applauncher.scss';
+@import '../ts/widgets/bar/bar.scss';
+@import '../ts/widgets/menu/menu.scss';
+@import '../ts/widgets/notification_center/notification_center.scss';
+
+
+// --------------------------------------------------
+// DEBUG ONLY
+// --------------------------------------------------
+// * {
+//     border: 1px solid red;
+// }

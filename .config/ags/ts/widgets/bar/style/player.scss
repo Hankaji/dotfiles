@@ -1,0 +1,35 @@
+@mixin players {
+    background-color: $overlay-bg;
+    // background-color: red;
+    border-radius: $radius;
+    // color: $fg;
+
+    .info {
+        padding: 0 $padding;
+
+        .track-icon {
+            // font-size: ;
+            color: $fg;
+        }
+
+        .label {
+            font-size: 1rem;
+            font-weight: 500;
+            font-style: italic;
+
+        }
+
+        &.playing {
+
+            .track-icon, .label, .icon {
+                color: $active-fg;
+            }
+
+            .label {
+                font-style: normal;
+                font-weight: bold;
+            }
+
+        }
+    }
+}
