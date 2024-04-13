@@ -75,14 +75,12 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting auto-notify)
 
 source $ZSH/oh-my-zsh.sh
 
+# -------------------------------------------------
 # User configuration
+# -------------------------------------------------
 
-# Pure theme
-fpath+=($HOME/.zsh/pure)
-autoload -U promptinit; promptinit
-prompt pure
-
-source $HOME/.oh-my-zsh/custom/themes/tokyo-pure-color
+# Starship
+eval "$(starship init zsh)"
 
 # In case a command is not found, try to find the package that has it
 #function command_not_found_handler {
@@ -109,9 +107,9 @@ aurhelper="yay"
 function in {
     local pkg="$1"
     if pacman -Si "$pkg" &>/dev/null ; then
-        catch-pass-prompt sudo pacman -S "$pkg"
+        sudo pacman -S "$pkg"
     else 
-        catch-pass-prompt $aurhelper -S "$pkg"
+        $aurhelper -S "$pkg"
     fi
 }
 
@@ -137,8 +135,7 @@ export ARCHFLAGS="-arch x86_64"
 #
 # Example aliases
 alias zshconfig="code ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias zshrc="nvim ~/.zshrc"
+alias zshrc="nvim ~/.zshrc && source ~/.zshrc"
 alias neo="neo-matrix"
 alias vc="code --disable-gpu"
 alias cd="z"
@@ -146,10 +143,11 @@ alias icat="kitty icat"
 alias mvn="mvn39"
 alias cw="~/.config/hypr/scripts/swww_change_wpaper.sh"
 alias lg="lazygit"
+alias zlj="zellij"
 # alias vc="code --ozone-platform-hint=wayland --disable-gpu"
 
 alias un='$aurhelper -Rns' # uninstall package
-alias up='catch-pass-prompt $aurhelper -Syu' # update system/package/aur
+alias up='$aurhelper -Syu' # update system/package/aur
 alias pl='$aurhelper -Qs' # list installed package
 alias ps='$aurhelper -Ss' # search for availabe package
 alias pc='$aurhelper -Sc' # remove unused cache
@@ -217,4 +215,12 @@ export PATH=$PATH:/home/hankaji/.spicetify
 # Add .NET Core SDK tools
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
+# Add Android command line tools
+export ANDROID_SDK_ROOT=/opt/android-sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
+# export PATH=$PATH:$ANDROID_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
 

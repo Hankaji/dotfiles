@@ -1,0 +1,68 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$nodejs\
+$rust\
+$golang\
+$php\
+$cmd_duration\
+$line_break\
+$python\
+$character"""
+
+[directory]
+style = "blue"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[character]
+success_symbol = "[❯](#bb9af7)"
+error_symbol = "[❯](#f7768e)"
+vimcmd_symbol = "[❮](#9ece6a)"
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style)"
+style = "#565f89"
+
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](#c0caf5) ($ahead_behind$stashed)]($style)"
+style = "#7aa2f7"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "#565f89"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "#e0af68"
+
+[python]
+format = "[$virtualenv]($style) "
+style = "#565f89"
+
+[nodejs]
+symbol = ""
+style = "fg:#76B65B"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "fg:#F65B08"
+format = '[\[$symbol ($version)\]]($style)'
+
+[golang]
+symbol = ""
+style = "fg:#78CFDD"
+format = '[ $symbol ($version) ]($style)'
