@@ -5,19 +5,20 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
+
+${custom.python_info}\
 $nodejs\
 $rust\
 $golang\
-$php\
 $cmd_duration\
+${custom.why}\
+
 $line_break\
 $python\
 $character"""
 
 [directory]
-style = "blue"
-truncation_length = 3
-truncation_symbol = "…/"
+style = "#7aa2f7"
 
 [character]
 success_symbol = "[❯](#bb9af7)"
@@ -52,6 +53,16 @@ style = "#e0af68"
 format = "[$virtualenv]($style) "
 style = "#565f89"
 
+[custom.python_info]
+# command = "python --version | cut -d ' ' -f 2"
+command = "echo foo"
+symbol = ""
+style = "fg:#306998"
+when = true
+# detect_files = ['Pipfile', 'pyproject.toml', 'requirements.txt']
+# detect_folders = ['venv', '.venv', 'env']
+# format = '[$symbol($output)]($style)'
+
 [nodejs]
 symbol = ""
 style = "fg:#76B65B"
@@ -60,7 +71,7 @@ format = '[ $symbol ($version) ]($style)'
 [rust]
 symbol = ""
 style = "fg:#F65B08"
-format = '[\[$symbol ($version)\]]($style)'
+format = '[$symbol ($version)]($style)'
 
 [golang]
 symbol = ""

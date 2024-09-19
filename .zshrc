@@ -102,7 +102,7 @@ eval "$(starship init zsh)"
 #    return 127
 #}
 
-aurhelper="yay"
+aurhelper="paru"
 
 function in {
     local pkg="$1"
@@ -133,9 +133,8 @@ export ARCHFLAGS="-arch x86_64"
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-alias zshconfig="code ~/.zshrc"
-alias zshrc="nvim ~/.zshrc && source ~/.zshrc"
+alias nzcfg="z ~/.config/nvims/lazyvim/ && nz ."
+alias zshrc="nz ~/.zshrc && source ~/.zshrc"
 alias neo="neo-matrix"
 alias vc="code --disable-gpu"
 alias cd="z"
@@ -144,7 +143,14 @@ alias mvn="mvn39"
 alias cw="~/.config/hypr/scripts/swww_change_wpaper.sh"
 alias lg="lazygit"
 alias zlj="zellij"
+alias pls="sudo"
+alias q="exit"
+alias se="sudoedit"
 # alias vc="code --ozone-platform-hint=wayland --disable-gpu"
+
+alias nv="nvim"
+alias nz="NVIM_APPNAME=nvims/lazyvim nvim"
+alias nc="NVIM_APPNAME=nvims/nvchad nvim"
 
 alias un='$aurhelper -Rns' # uninstall package
 alias up='$aurhelper -Syu' # update system/package/aur
@@ -160,11 +166,18 @@ alias .3='z ../../..'
 alias .4='z ../../../..'
 alias .5='z ../../../../..'
 
+alias ls='eza -lT -L 1 --icons --git-ignore --hyperlink --no-filesize --no-user --no-permissions --no-time'
+
 # Local binaries
 export PATH="$HOME/.local/bin/:$PATH"
 
 # Display pokemon
-pokemon-colorscripts --no-title -r 1,3,6
+source /home/hankaji/.zsh/scripts/startup-display.sh
+
+# Set default editor
+function editor { NVIM_APPNAME=nvims/lazyvim nvim $@ }
+export SUOD_EDITOR='editor'
+export EDITOR='editor'
 
 # The fuck
 eval "$(thefuck --alias)"
@@ -216,11 +229,19 @@ export PATH=$PATH:/home/hankaji/.spicetify
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
+# Flutter
+export PATH="$HOME/development/flutter/bin:$PATH"
+
 # Add Android command line tools
-export ANDROID_SDK_ROOT=/opt/android-sdk
-export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
-# export PATH=$PATH:$ANDROID_ROOT/emulator
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
+# export ANDROID_SDK_ROOT=/opt/android-sdk
+export ANDROID_HOME=/opt/android-sdk
+export ANDROID_AVD_HOME=$HOME/.android/avd
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin/
+export PATH=$PATH:$ANDROID_HOME/platform-tools/
+export PATH=$PATH:$ANDROID_HOME/tools/bin/
+export PATH=$PATH:$ANDROID_HOME/emulator/
+export PATH=$PATH:$ANDROID_HOME/tools/
+
+# Paru configuration
+export PARU_CONF="$HOME/.config/paru/paru.conf"
 
