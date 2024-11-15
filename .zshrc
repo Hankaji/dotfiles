@@ -71,8 +71,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting auto-notify)
-
+plugins=(git zsh-autosuggestions zsh-autocomplete zsh-syntax-highlighting auto-notify)
 source $ZSH/oh-my-zsh.sh
 
 # -------------------------------------------------
@@ -81,6 +80,14 @@ source $ZSH/oh-my-zsh.sh
 
 # Starship
 eval "$(starship init zsh)"
+
+# Zsh autocomplete
+# Make <LeftArrow> and <RightArrow> move cursor instead of selection on menu
+bindkey -M menuselect  '^[[D' .backward-char  '^[OD' .backward-char
+bindkey -M menuselect  '^[[C'  .forward-char  '^[OC'  .forward-char
+
+# Make <Enter> submit command instead of confirm command
+bindkey -M menuselect '^M' .accept-line
 
 # In case a command is not found, try to find the package that has it
 #function command_not_found_handler {
@@ -151,6 +158,7 @@ alias se="sudoedit"
 alias nv="nvim"
 alias nz="NVIM_APPNAME=nvims/lazyvim nvim"
 alias nc="NVIM_APPNAME=nvims/nvchad nvim"
+alias gdv="nz . --listen ./godothost"
 
 alias un='$aurhelper -Rns' # uninstall package
 alias up='$aurhelper -Syu' # update system/package/aur
@@ -245,3 +253,7 @@ export PATH=$PATH:$ANDROID_HOME/tools/
 # Paru configuration
 export PARU_CONF="$HOME/.config/paru/paru.conf"
 
+# source "$HOME/.rye/env"
+
+# Tex live
+export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
