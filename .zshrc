@@ -146,7 +146,7 @@ alias neo="neo-matrix"
 alias vc="code --disable-gpu"
 alias cd="z"
 alias icat="kitty icat"
-alias mvn="mvn39"
+# alias mvn="mvn39"
 alias cw="~/.config/hypr/scripts/swww_change_wpaper.sh"
 alias lg="lazygit"
 alias zlj="zellij"
@@ -257,3 +257,10 @@ export PARU_CONF="$HOME/.config/paru/paru.conf"
 
 # Tex live
 export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
+
+# Don't know what is this but just commented out for safe
+# . "$HOME/.local/share/../bin/env"
+
+# uv - Python package manager (Written in rust)
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
