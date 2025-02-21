@@ -1,0 +1,15 @@
+(
+   theme: (
+        colors: (
+            primary: (
+                bg: "#24283b",
+                fg: "#a9b1d6"
+            )
+        )
+    ),
+    bar: ( 
+        padding: 10,
+        anchor: "Top",
+        workspaces: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    )
+)

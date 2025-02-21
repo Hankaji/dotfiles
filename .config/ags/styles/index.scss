@@ -1,0 +1,93 @@
+@use 'themes/tokyo-night.scss' as *;
+@use 'widgets/button.scss';
+
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+// $fg-color: #{"@theme_fg_color"};
+// $bg-color: #{"@theme_bg_color"};
+$border-radius: 12px;
+
+* {
+  border: solid 0.5px rgba(#ff0000, 0.8);
+}
+
+window.Bar {
+    background: transparent;
+    color: $fg-color;
+    font-weight: bold;
+
+    > box {
+        background: $bg-color;
+        padding: 4px 12px;
+
+        .workspaces {
+          > button {
+            transition: all 300ms ease;
+            background: #565f89;
+            border-radius: $border-radius;
+            min-width: 5pt;
+            min-height: 5pt;
+          }
+
+          > .occupied {
+            background: #a9b1d6;
+            border-radius: $border-radius;
+            min-width: 7pt;
+            min-height: 7pt;
+          }
+
+          > .focused {
+            background: #bb9af7;
+            border-radius: $border-radius;
+            min-width: 20pt;
+            min-height: 12pt;
+          }
+        }
+    }
+}
+
+window.NotificationPopup {
+  // min-width: 400pt;
+  // min-height: 50pt;
+  // margin: 120px;
+  // padding-right: 12px;
+
+  > box {
+    margin: 12px 12px 0 12px;
+    background: #3f000b;
+
+    .testBox {
+      background-color: #00ff00;
+    }
+
+    > overlay .notif {
+      transition: all 600ms cubic-bezier(0.17,0.84,0.44,1);
+      background: rgba(#0ff00b, 0.5);
+      // margin-top: 25px;
+
+      // .stack {
+      //
+      // }
+  
+      // &:first-child {
+      //   // background: rgba(#0ff0fb, 0.5);
+      //   border-radius: 12px;
+      // }
+
+    }
+
+  }
+
+
+}
+
+window.ActivateLinux {
+  color: #888;
+
+  > box {
+    margin: 64px 128px;
+
+    > label:first-child {
+      font-size: 20px;
+    }
+  }
+}

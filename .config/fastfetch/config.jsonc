@@ -1,0 +1,91 @@
+{
+	"$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+	"display": {
+		"separator": " : ",
+		"constants": ["────────────────────────────────────────"],
+		"size": {
+			"binaryPrefix": "jedec"
+		}
+	},
+	"modules": [
+		{
+			"type": "title",
+			"key": " ハンカジ",
+			"keyColor": "blue"
+		},
+		{
+			"type": "custom",
+			"format": "{$1}",
+			"outputColor": "white"
+		},
+		{
+			"type": "os",
+			"key": " OS",
+			"keyColor": "red"
+		},
+		{
+			"type": "kernel",
+			"key": " Kernel",
+			"keyColor": "red"
+		},
+		{
+			"type": "packages",
+			"key": "󰏓 Packages",
+			"keyColor": "green"
+		},
+		{
+			"type": "shell",
+			"key": " Shell",
+			"keyColor": "green"
+		},
+		{
+			"type": "display",
+			"key": "󰍹 Display",
+			"keyColor": "green"
+		},
+		{
+			"type": "de",
+			"key": "󰈩 DE",
+			"keyColor": "yellow"
+		},
+		{
+			"type": "wm",
+			"key": "󰈩 WM",
+			"keyColor": "yellow"
+		},
+		{
+			"type": "terminal",
+			"key": " Terminal",
+			"keyColor": "yellow"
+		},
+		{
+			"type": "custom",
+			"format": "{$1}",
+			"outputColor": "white"
+		},
+
+		{
+			"type": "cpu",
+			"key": " CPU",
+			"keyColor": "blue"
+		},
+		{
+			"type": "gpu",
+			"key": " GPU",
+			"keyColor": "blue"
+		},
+		{
+			"type": "memory",
+			"key": " Memory",
+			"keyColor": "magenta"
+		},
+		{
+			"type": "disk",
+			"key": " Disk",
+			"keyColor": "magenta"
+		},
+
+		"break",
+		"colors"
+	]
+}

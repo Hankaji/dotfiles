@@ -1,9 +1,0 @@
-@mixin inherit-child(
-    $color: false,
-) {
-    & * {
-        @if $color {
-            color: inherit;
-        }
-    }
-}

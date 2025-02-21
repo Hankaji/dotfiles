@@ -1,0 +1,20 @@
+[[profile]]
+name = "test"
+
+[[profile.output]]
+enable = true
+search = ["m=DELL U2723QE", "s=44397P3", "v=Dell Inc."]
+mode = "3840x2160@60Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = true
+search = ["m=0xAF90", "s=", "v=AU Optronics"]
+mode = "1920x1080@144.149Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
