@@ -71,7 +71,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-autocomplete zsh-syntax-highlighting auto-notify)
+plugins=(git zsh-autosuggestions zsh-autocomplete zsh-syntax-highlighting auto-notify direnv)
 source $ZSH/oh-my-zsh.sh
 
 # -------------------------------------------------
@@ -126,11 +126,11 @@ function in {
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -144,15 +144,18 @@ alias nzcfg="z ~/.config/nvims/lazyvim/ && nz ."
 alias zshrc="nz ~/.zshrc && source ~/.zshrc"
 alias neo="neo-matrix"
 alias vc="code --disable-gpu"
-alias cd="z"
+# alias cd="z"
 alias icat="kitty icat"
-# alias mvn="mvn39"
+alias kssh="kitten ssh"
 alias cw="~/.config/hypr/scripts/swww_change_wpaper.sh"
 alias lg="lazygit"
 alias zlj="zellij"
 alias pls="sudo"
 alias q="exit"
 alias se="sudoedit"
+alias clr="clear"
+alias task="go-task"
+alias pwdcp="pwd | tr -d '\n' | clipcopy"
 # alias vc="code --ozone-platform-hint=wayland --disable-gpu"
 
 alias nv="nvim"
@@ -176,6 +179,9 @@ alias .5='z ../../../../..'
 
 alias ls='eza -lT -L 1 --icons --git-ignore --hyperlink --no-filesize --no-user --no-permissions --no-time'
 
+# Play Bell sound on passwd prompt
+export SUDO_PROMPT=$'\a[sudo] password for %p: '
+
 # Local binaries
 export PATH="$HOME/.local/bin/:$PATH"
 
@@ -184,7 +190,7 @@ source /home/hankaji/.zsh/scripts/startup-display.sh
 
 # Set default editor
 function editor { NVIM_APPNAME=nvims/lazyvim nvim $@ }
-export SUOD_EDITOR='editor'
+export SUDO_EDITOR='editor'
 export EDITOR='editor'
 
 # The fuck
@@ -200,28 +206,6 @@ eval "$(zoxide init zsh)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/hankaji/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/hankaji/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/hankaji/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/hankaji/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# Ibus bamboo
-# export GTK_IM_MODULE=ibus
-# export XMODIFIERS=@im=ibus
-# export QT_IM_MODULE=ibus
-#pidof ibus-daemon > /dev/null || ibus-daemon -drx
-# ibus-daemon -drx
-
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -234,8 +218,8 @@ eval "$(jenv init -)"
 export PATH=$PATH:/home/hankaji/.spicetify
 
 # Add .NET Core SDK tools
-export DOTNET_ROOT=$HOME/.dotnet
-export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+# export DOTNET_ROOT=$HOME/.dotnet
+# export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 # Flutter
 export PATH="$HOME/development/flutter/bin:$PATH"
@@ -253,8 +237,6 @@ export PATH=$PATH:$ANDROID_HOME/tools/
 # Paru configuration
 export PARU_CONF="$HOME/.config/paru/paru.conf"
 
-# source "$HOME/.rye/env"
-
 # Tex live
 export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
 
@@ -262,5 +244,8 @@ export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
 # . "$HOME/.local/share/../bin/env"
 
 # uv - Python package manager (Written in rust)
-eval "$(uv generate-shell-completion zsh)"
+# eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+
+# GCR SSH
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
